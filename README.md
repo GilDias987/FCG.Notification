@@ -22,6 +22,7 @@ Este serviço é um consumidor puramente reativo.
 
 ## 4. Configuração do Ambiente
 Para que a aplicação funcione corretamente, edite o arquivo `appsettings.Development.json` seguindo o modelo abaixo:
+
 ```json
 {
   "Logging": {
@@ -34,7 +35,7 @@ Para que a aplicação funcione corretamente, edite o arquivo `appsettings.Devel
     "Server": "smtp.gmail.com",
     "Port": "587",
     "User": "fiapclound@gmail.com",
-    "Password": "ognvkt**********"
+    "Password": "ognvkt***********"
   },
   "Rabbitmq": {
     "Url": "localhost",
@@ -43,8 +44,7 @@ Para que a aplicação funcione corretamente, edite o arquivo `appsettings.Devel
   },
   "AllowedHosts": "*"
 }
----
-
+```
 ## 👥 Integrantes
 - **Nome do Grupo:**: 33.
     - **Participantes:**: 

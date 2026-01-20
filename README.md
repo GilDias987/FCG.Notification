@@ -43,6 +43,7 @@ Para que a aplicação funcione corretamente, edite o arquivo `appsettings.Devel
   },
   "AllowedHosts": "*"
 }
+---
 
 ## 👥 Integrantes
 - **Nome do Grupo:**: 33.

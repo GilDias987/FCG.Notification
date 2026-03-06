@@ -20,13 +20,31 @@ Este serviço é um consumidor puramente reativo.
 * **Documentação:** Swagger
 * **Orquestração:** Docker & Kubernetes
 
-## 4. Variáveis de Ambiente
-| Variável | Descrição | Exemplo |
-| :--- | :--- | :--- |
-| `RabbitMQ__Host` | Host do Broker de Mensageria | `rabbitmq://rabbitmq-service` |
-| `Smtp__Provider` | Provedor de e-mail simulado | `ConsoleLogger` |
-| `App__WelcomeTemplate` | Template da mensagem de boas-vindas | `Bem-vindo à FCG!` |
+## 4. Configuração do Ambiente
+Para que a aplicação funcione corretamente, edite o arquivo `appsettings.Development.json` seguindo o modelo abaixo:
 
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "Smtp": {
+    "Server": "smtp.gmail.com",
+    "Port": "587",
+    "User": "fiapclound@gmail.com",
+    "Password": "ognvkt***********"
+  },
+  "Rabbitmq": {
+    "Url": "localhost",
+    "Username": "admin",
+    "Password": "admin123"
+  },
+  "AllowedHosts": "*"
+}
+```
 ## 👥 Integrantes
 - **Nome do Grupo:**: 33.
     - **Participantes:**: 

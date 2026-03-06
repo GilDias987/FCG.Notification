@@ -28,21 +28,29 @@ namespace FCG.Notification.Application.UseCases.Registration
                 x.AddConsumer<UserCreateConsumer>();
                 x.AddConsumer<PaymentProcessConsumer>();
 
-                x.UsingRabbitMq((context, cfg) =>
+                x.UsingAzureServiceBus((context, cfg) =>
                 {
-                    cfg.Host(configuration["Rabbitmq:Url"], "/", h =>
-                    {
-                        h.Username(configuration["Rabbitmq:Username"]);
-                        h.Password(configuration["Rabbitmq:Password"]);
-                    });
+                    cfg.Host(configuration["ServiceBus:ConnectionString"]);
+
 
                     cfg.ReceiveEndpoint("user-create-queue", e =>
                     {
+                        // não criar topology automática (evita topics)
+                        e.ConfigureConsumeTopology = false;
+
+                        // evita propriedades não suportadas
+                        e.RemoveSubscriptions = true;
                         e.ConfigureConsumer<UserCreateConsumer>(context);
                     });
 
                     cfg.ReceiveEndpoint("payment-process-notification-queue", e =>
                     {
+                        // não criar topology automática (evita topics)
+                        e.ConfigureConsumeTopology = false;
+
+                        // evita propriedades não suportadas
+                        e.RemoveSubscriptions = true;
+
                         e.ConfigureConsumer<PaymentProcessConsumer>(context);
                     });
                 });

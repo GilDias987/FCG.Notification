@@ -27,13 +27,13 @@ jobs:
         run: dotnet build  --configuration Release FCG.Notification/FCG.Notification.slnx
 
       - name: dotnet publish
-        run: dotnet publish FCG.Notification/FCG.Notification.WebAPI/FCG.Notification.WebAPI.csproj -c Release -o "${{env.DOTNET_ROOT}}/Notification"
+        run: dotnet publish FCG.Notification/FCG.Notification.WebAPI/FCG.Notification.WebAPI.csproj -c Release -o "${{env.DOTNET_ROOT}}/FCG.Notification"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          path: ${{env.DOTNET_ROOT}}/FCG.Notification
 
   deploy:
     runs-on: windows-latest
@@ -54,4 +54,5 @@ jobs:
           package: .
 
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E4556C2001514922AE27571DF56F4DA7 }}
+
 

@@ -24,7 +24,7 @@ jobs:
           dotnet-version: '10.x'
 
       - name: Build with dotnet
-        run: dotnet build  --configuration Release FCG.Catalog/FCG.Notification.slnx
+        run: dotnet build  --configuration Release FCG.Notification/FCG.Notification.slnx
 
       - name: dotnet publish
         run: dotnet publish FCG.Notification/FCG.Notification.WebAPI/FCG.Notification.WebAPI.csproj -c Release -o "${{env.DOTNET_ROOT}}/Notification"
@@ -54,3 +54,4 @@ jobs:
           package: .
 
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E4556C2001514922AE27571DF56F4DA7 }}
+

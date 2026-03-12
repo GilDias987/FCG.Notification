@@ -8,7 +8,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var configuration = new ConfigurationBuilder()
+var configuration = new ConfigurationBuilder() 
     .AddJsonFile("appsettings.json")
     .Build();
 

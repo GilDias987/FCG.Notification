@@ -8,7 +8,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var configuration = new ConfigurationBuilder()
+var configuration = new ConfigurationBuilder() 
     .AddJsonFile("appsettings.json")
     .Build();
 
@@ -22,41 +22,8 @@ builder.Services.AddOpenApiDocument(options =>
 {
     options.Title = "Api Notification - Fiap Cloud Game";
     options.Version = "1.0";
-    options.AddSecurity("Bearer", new NSwag.OpenApiSecurityScheme
-    {
-        Description = "Bearer token authorization header",
-        Type = NSwag.OpenApiSecuritySchemeType.Http,
-        In = NSwag.OpenApiSecurityApiKeyLocation.Header,
-        Name = "Authorization",
-        Scheme = "Bearer"
-    });
-
-    options.OperationProcessors.Add(
-        new NSwag.Generation.Processors.Security.AspNetCoreOperationSecurityScopeProcessor("Bearer"));
 });
 
-#region [JWT]
-
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-{
-    options.RequireHttpsMetadata = false;
-    options.SaveToken = true;
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = false,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-    };
-});
-
-#endregion
 
 #region Exception Global
 
@@ -72,12 +39,6 @@ builder.Services.AddScoped<IEmailService, SmtpEmailService>();
 #endregion
 
 builder.Services.AddProblemDetails();
-
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("ADMINISTRADOR", policy => policy.RequireRole("ADMINISTRADOR"));
-});
-
 var app = builder.Build(); 
 
 app.Lifetime.ApplicationStarted.Register(() =>
@@ -87,11 +48,11 @@ app.Lifetime.ApplicationStarted.Register(() =>
 });
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseOpenApi();
     app.UseSwaggerUI();
-}
+//}
 
 app.UseHttpsRedirection();
 
